@@ -42,7 +42,9 @@ function getWinner(playerMove,computerMove) {
     // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
     if (playerMove === computerMove){
         winner = "Tie";
-    } else if (((playerMove === "Rock") && (computerMove === "scissors")) || ((playerMove === "paper") && (computerMove === "rock")) || ((playerMove === "scissors") && (computerMove === "paper")))
+    } else if (((playerMove === "rock") && (computerMove === "scissors")) || 
+                ((playerMove === "paper") && (computerMove === "rock")) || 
+                ((playerMove === "scissors") && (computerMove === "paper"))){
         winner = "Player";
     } else {
         winner = "Computer";
@@ -56,6 +58,27 @@ function playToFive() {
     var computerWins = 0;
     // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
     /* YOUR CODE HERE */
-    return [playerWins, computerWins];
+    var round = 0;
+
+    while ((playerWins < 5) && (computerWins < 5)) {
+        var playerMove = getPlayerMove();
+        var computerMove = getComputerMove();
+        var winner = getWinner(playerMove, computerMove);
+
+        round += 1;
+
+        if (winner === "Player") {
+            playerWins += 1;
+            console.log("Round " + round + ": " + "Player has " + playerMove + " and Computer has " + computerMove + " - " + winner + " wins and the score is Player with " + playerWins + " and Computer with " + computerWins + ".");
+        } else if (winner === "Computer") {
+            computerWins += 1;
+            console.log("Round " + round + ": " + "Player has " + playerMove + " and Computer has " + computerMove + " - " + winner + " wins and the score is Player with " + playerWins + " and Computer with " + computerWins + ".");
+        } else {
+            console.log("Round " + round + ": " + "Player has " + playerMove + " and Computer has " + computerMove + " - this is a tie and the score remains Player with " + playerWins + " and Computer with " + computerWins + ".");
+        }
+    }
+    return "Final score is " + [playerWins, computerWins];
 }
+
+playToFive();
 
